@@ -18,18 +18,6 @@ s3 = new section((canvasW/3)*2,0,canvasW/3,canvasH,10);
 
 var setup = ()=>{
   createCanvas(canvasW,canvasH)
-  // background(0,0,255)
-  //
-  // fill(255)
-  // console.log(s1.w)
-  // rect(s1.x,s1.y,s1.w,s1.h)
-  //
-  // fill(255)
-  // console.log(s2.w)
-  // rect(s2.x,s2.y,s2.w,s2.h)
-  //
-  // fill(255)
-  // rect(s3.x,s3.y,s3.w,s3.h)
 }
 
 var draw = ()=>{
