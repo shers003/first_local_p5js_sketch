@@ -17,7 +17,8 @@ s2 = new section(canvasW/3,0,canvasW/3,canvasH,10)
 s3 = new section((canvasW/3)*2,0,canvasW/3,canvasH,10);
 
 var setup = ()=>{
-  createCanvas(canvasW,canvasH)
+  createCanvas(canvasW,canvasH);
+  noCursor();
 }
 
 var draw = ()=>{

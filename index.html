@@ -28,11 +28,29 @@
     }
     .list{
       margin-top: 10%;
+      margin-left: 25%;
+      margin-right: 25%;
+      height: auto;
+      width: 50rem;
     }
     .list ul{
       margin:20px;
       list-style-type: none;
+      text-align:left;
+      position: relative;
+      left: 250px;
+    }
 
+    .list .section{
+      display: none;
+    }
+
+    .list .section ul{
+      font-size: 10px;
+      text-align: left;
+      list-style-type: circle;
+      position: relative;
+      left: 30px;
     }
 
   </style>
@@ -43,14 +61,40 @@
   <div class="list">
     <h1>My sketches:</h1>
     <ul>
-      <li><a href="ireland.html">Ireland</a> </li>
-      <li><a href="p5js_test.html">squares</a> </li>
-      <li><a href="cursorColour.html">cursorColour</a> </li>
-      <li><a href="ellipseDraw.html">ellipseDraw</a> </li>
-      <li><a href="spaceSquare.html">spaceSquare</a> </li>
-      <li><a href="halfDraw.html">halfDraw</a> </li>
+      <li><a href="#" onclick="showSection('learning')">Learning -</a></li>
+
+      <div class="section" id="learning" >
+        <ul>
+          <li><a href="ireland.html">Ireland</a> </li>
+          <li><a href="p5js_test.html">squares</a> </li>
+          <li><a href="cursorColour.html">cursorColour</a> </li>
+          <li><a href="ellipseDraw.html">ellipseDraw</a> </li>
+          <li><a href="spaceSquare.html">spaceSquare</a> </li>
+          <li><a href="halfDraw.html">halfDraw</a> </li>
+        </ul>
+      </div>
+
     </ul>
   </div>
 </body>
+<script type="text/javascript">
+
+  const showSection = (sec)=>{
+
+    var section = document.getElementById(sec);
+
+    if (section.style.display != 'block'){
+
+      section.style.display = 'block'
+
+    }else{
+
+      section.style.display = 'none'
+
+    }
+
+
+  }
+</script>
 
 </html>

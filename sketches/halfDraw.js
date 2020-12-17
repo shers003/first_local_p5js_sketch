@@ -17,11 +17,13 @@ function draw() {
     stroke(50)
     rect(canvasW/2,0,canvasW/2,canvasH)
 
+
   }else{
     fill(0)
     noStroke()
     rect(canvasW/2,0,canvasW/2,canvasH)
     stroke(100)
+    //circle(mouseX+500,mouseY+500,30);
   }
 
   circle(mouseX,mouseY,30);

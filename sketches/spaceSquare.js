@@ -35,7 +35,6 @@ function draw() {
 
   drawCount++;
 
-
   background(0);
   noStroke();
   fill(255)
@@ -47,23 +46,29 @@ function draw() {
   mySquare.y += random(range[0],range[1]);
 
   if(drawCount%50 == 0){
-
+    fill(255,80)
     canvas2.ellipse(star.x,star.y,star.size)
+  }
 
-  }
-  if(mouseIsPressed){
-    canvas2.square(mySquare.x, mySquare.y, mySquare.size )
-  }
 
   if(drawCount%500== 0){
-    range[0]--;
-    range[1]++;
-      console.log(range)
+    if(range[1]>50){
+      range[0]--;
+      range[1]++;
+    }
   }
 
+
+  //fill(120,120,220)
   square(mySquare.x, mySquare.y, mySquare.size);
+  fill(255)
   ellipse(star.x,star.y,star.size);
 
   image(canvas2,0,0)
 
+  if(mouseIsPressed){
+    //canvas2.square(mySquare.x, mySquare.y, mySquare.size )
+    mySquare.x = mouseX;
+    mySquare.y = mouseY;
+  }
 }
