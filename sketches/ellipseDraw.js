@@ -1,8 +1,10 @@
 const canvasW = window.innerWidth;
 const canvasH = window.innerHeight;
+
 const colors = ['#ED5925','#2568ED',
                 '#C6ED25','#FFFFFF','#ED25CC',0];
-var index=Math.floor(Math.random()*colors.length);
+
+var index = Math.floor(Math.random()*colors.length);
 
 
 function setup() {
@@ -12,7 +14,7 @@ function setup() {
 
 function draw() {
 
-  var color =colors[index]
+  var color = colors[index]
 
   if(mouseIsPressed){
    fill(color);
