@@ -6,6 +6,7 @@ var myCircle ={
 
 }
 var bg = true;
+var mv = true;
 var r,g,b;
 
 var canvasW = window.innerWidth;
@@ -13,6 +14,7 @@ var canvasH = window.innerHeight;
 
 var setup = () =>{
   createCanvas(canvasW, canvasH);
+  noCursor();
 
   myCircle.x = random(0, canvasW);
   myCircle.y = random(0, canvasH);
@@ -48,8 +50,10 @@ var bounce = () =>{
 }
 
 var move = () =>{
-  myCircle.x += myCircle.xspeed;
-  myCircle.y += myCircle.yspeed;
+  if(mv){
+    myCircle.x += myCircle.xspeed;
+    myCircle.y += myCircle.yspeed;
+  }
 }
 
 //Interactiom
@@ -59,19 +63,54 @@ var mouseClicked = () =>{
 
 var keyReleased = () =>{
   if(bg){
+    //W and up arrow
     if(keyCode == 87 || keyCode == 38){
-      myCircle.xspeed++;
+      if(Math.sign(myCircle.xspeed) == 1){
+        myCircle.xspeed++;
+      }else if(Math.sign(myCircle.xspeed) == -1){
+        myCircle.xspeed--;
+      }else{
+        myCircle.xspeed++;
+      }
+    }
 
-    }
+    //S and down arrow
     if(keyCode == 83 || keyCode == 40){
-      myCircle.xspeed++;
+      if(Math.sign(myCircle.xspeed) == 1){
+        myCircle.xspeed--;
+      }else if(Math.sign(myCircle.xspeed) == -1){
+        myCircle.xspeed++;
+      }else{
+        myCircle.xspeed++;
+      }
     }
+
+    //A and left arrow
     if(keyCode == 65 || keyCode == 37){
-      myCircle.yspeed++;
+      if(Math.sign(myCircle.yspeed) == 1){
+        myCircle.yspeed--;
+      }else if(Math.sign(myCircle.yspeed) == -1){
+        myCircle.yspeed++;
+      }else{
+        myCircle.yspeed++;
+      }
     }
+
+    //D and right arrow
     if(keyCode == 68 || keyCode == 39){
-      myCircle.yspeed--;
+      if(Math.sign(myCircle.yspeed) == 1){
+        myCircle.yspeed++;
+      }else if(Math.sign(myCircle.yspeed) == -1){
+        myCircle.yspeed--;
+      }else{
+        myCircle.yspeed++;
+      }
     }
   }
+  if(keyCode == 32){
+    console.log(mv);
+    mv = !mv;
+  }
 
+  console.log(myCircle.xspeed,myCircle.yspeed,keyCode);
 }

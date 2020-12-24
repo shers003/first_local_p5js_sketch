@@ -10,6 +10,7 @@ var index = Math.floor(Math.random()*colors.length);
 function setup() {
   createCanvas(canvasW, canvasH);
   background(50,50,255);
+  noCursor();
 }
 
 function draw() {

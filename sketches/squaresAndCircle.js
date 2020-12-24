@@ -1,72 +1,100 @@
 var canvasW = window.innerWidth;
 var canvasH = window.innerHeight;
-var direc = true;
-var count = 1;
 
-var theCircle = {
-  x:0,
-  y:0,
-  s:0
-}
+class Board {
+  constructor(size, x, y, speed){
+    this.circleSize = size
+    this.circleX = x
+    this.circleY = y
+    this.vert = false
+    this.direc = true
+    this.speed = speed
+  }
 
-var theSquares = {
-  x:0,
-  y:10,
-  s:10
+  #makeSection(xs, ys, xe,ye){
+    let x, y;
+    for(x = xs; x <= xe; x += 10){
+      fill(random(0,255))
+      square(x, ys, 10)
+    for(y = ys;y <= ye;y += 10){
+      fill(random(0,255))
+      square(x, y, 10)
+      }
+    }
+  }
+
+  makeTunnel(x,y){
+    var gap = this.circleSize 
+
+    if(!this.vert){
+
+      this.#makeSection(0,0,canvasW,y-(gap/2));
+      this.#makeSection(0,y+(gap/2),canvasW,canvasH);
+
+    }
+    else{
+
+      this.#makeSection(0,0,x-(gap/2),canvasH)
+      this.#makeSection(x+(gap/2),0,canvasW,canvasH)
+
+    }
+  }
+
+  makeCircle(x,y){
+    fill(0)
+    circle(x,y,this.circleSize)
+  }
 }
 
 function setup() {
   createCanvas(canvasW, canvasH);
   noCursor();
-
-  theCircle.s = 60;
-  theCircle.x = 26;
-  theCircle.y = canvasH/2;
+  board = new Board(30, 0, canvasH/2, 50)
 }
 
 function draw() {
   background(220);
 
-  //squares
-  theSquares.y = 10;
-  for(theSquares.x = 0; theSquares.x <= canvasW; theSquares.x += 15){
-    fill(random(0,255))
-    square(theSquares.x, 10, theSquares.s)
-    for(theSquares.y = 10; theSquares.y <= (canvasH/2)-30; theSquares.y += 15){
+  if(!board.vert){
 
-      fill(random(0,255))
-      square(theSquares.x, theSquares.y, theSquares.s)
+    board.makeTunnel(board.circleX,board.circleY)
+    board.makeCircle(board.circleX,board.circleY)
+
+    if(board.circleX <= canvasW){
+      board.direc = !board.direc
     }
-  }
-
-  theSquares.y = (canvasH/2)+30
-  for(theSquares.x = 0; theSquares.x <= canvasW; theSquares.x += 15){
-    fill(random(0,255))
-    square(theSquares.x, theSquares.y, theSquares.s)
-    for(theSquares.y = (canvasH/2)+30; theSquares.y <=canvasH; theSquares.y += 15){
-      fill(random(0,255))
-      square(theSquares.x, theSquares.y, theSquares.s)
+    if(board.circleX >= 0){
+      board.direc = !board.direc
     }
-  }
-
-  //This is bouncing circle
-  if(theCircle.x  >= canvasW-30){
-    direc = !direc;
-    count++;
-  }
-  else if(theCircle.x < 26){
-    direc = !direc;
-    count++;
-  }
-
-  if(direc){
-    theCircle.x += 30;
+    if(board.direc){
+      board.circleX += board.speed;
+    }
+    else{
+      board.circleX -= board.speed;
+    }
   }
   else{
-    theCircle.x -= 30;
+    board.makeTunnel(board.circleX,board.circleY)
+    board.makeCircle(board.circleX,board.circleY)
+
+    if(board.circleY <= canvasH){
+      board.direc = !board.direc
+    }
+    if(board.circleY >= 0){
+      board.direc = !board.direc
+    }
+    if(board.direc){
+      board.circleY += board.speed;
+    }
+    else{
+      board.circleY -= board.speed;
+    }
   }
 
+}
 
-  fill(0);
-  circle(theCircle.x,theCircle.y,theCircle.s);
+var keyReleased = ()=>{
+  if(keyCode == 32){
+    board.vert = !board.vert
+  }
 }
