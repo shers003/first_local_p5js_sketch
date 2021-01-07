@@ -1,5 +1,6 @@
 var canvasW = window.innerWidth;
 var canvasH = window.innerHeight;
+var circleSize = 50
 
 class Board {
   constructor(size, x, y, speed){
@@ -24,7 +25,7 @@ class Board {
   }
 
   makeTunnel(x,y){
-    var gap = this.circleSize 
+    var gap = this.circleSize
 
     if(!this.vert){
 
@@ -44,52 +45,58 @@ class Board {
     fill(0)
     circle(x,y,this.circleSize)
   }
+
+  moveCircle(canvasW, canvasH){
+
+    if(!this.vert){
+
+      if(this.circleX <= canvasW - this.circleSize){
+        this.direc = !this.direc
+      }
+      if(this.circleX >= this.circleSize){
+        board.direc = !board.direc
+      }
+      if(this.direc){
+        this.circleX += this.speed;
+      }
+      else{
+        this.circleX -= this.speed;
+      }
+
+    }else{
+
+      if(this.circleY <= canvasH - this.circleSize){
+        this.direc = !this.direc
+      }
+      if(this.circleY >= this.circleSize){
+        this.direc = !this.direc
+      }
+      if(this.direc){
+        this.circleY += this.speed;
+      }
+      else{
+        this.circleY -= this.speed;
+      }
+
+    }
+
+  }
+
+  
 }
 
 function setup() {
   createCanvas(canvasW, canvasH);
   noCursor();
-  board = new Board(30, 0, canvasH/2, 50)
+  board = new Board(circleSize , circleSize, canvasH/2, 50)
 }
 
 function draw() {
   background(220);
 
-  if(!board.vert){
-
-    board.makeTunnel(board.circleX,board.circleY)
-    board.makeCircle(board.circleX,board.circleY)
-
-    if(board.circleX <= canvasW){
-      board.direc = !board.direc
-    }
-    if(board.circleX >= 0){
-      board.direc = !board.direc
-    }
-    if(board.direc){
-      board.circleX += board.speed;
-    }
-    else{
-      board.circleX -= board.speed;
-    }
-  }
-  else{
-    board.makeTunnel(board.circleX,board.circleY)
-    board.makeCircle(board.circleX,board.circleY)
-
-    if(board.circleY <= canvasH){
-      board.direc = !board.direc
-    }
-    if(board.circleY >= 0){
-      board.direc = !board.direc
-    }
-    if(board.direc){
-      board.circleY += board.speed;
-    }
-    else{
-      board.circleY -= board.speed;
-    }
-  }
+  board.makeTunnel(board.circleX,board.circleY);
+  board.makeCircle(board.circleX,board.circleY);
+  board.moveCircle(canvasW, canvasH);
 
 }
 
