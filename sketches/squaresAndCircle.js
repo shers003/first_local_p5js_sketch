@@ -54,7 +54,7 @@ class Board {
         this.direc = !this.direc
       }
       if(this.circleX >= this.circleSize){
-        board.direc = !board.direc
+        this.direc = !this.direc
       }
       if(this.direc){
         this.circleX += this.speed;
